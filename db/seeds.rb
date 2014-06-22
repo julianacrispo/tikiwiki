@@ -16,6 +16,12 @@ wikis = Wiki.all
   )
 end
 
+User.first.update_attributes(
+  email: 'email@example.com',
+  password: 'helloworld',
+)
+
+
 puts "Seed finished"
 puts "#{Wiki.count} wikis created"
 puts "#{Post.count} posts created"
