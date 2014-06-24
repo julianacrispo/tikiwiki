@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/wikis'
-
   root 'welcome#index'
 end
 
