@@ -1,14 +1,54 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <%= current_user.email %>'s wikis
+  </div>
+</div>
 
+<table class="table table-hover">
+  <thead>
+    <tr> 
+      <th> Wiki </th>
+      <th> Actions</th>
+    </tr> 
+  </thead>
+     <tbody>
+      <% @wikis.each do |wiki| %>
+    <tr> 
+      <td><%= link_to wiki.subject, wiki %> </td>
+      <td><%= link_to "Edit", wiki, class: "btn btn-success" %> 
+          <%= link_to "Delete", "#", class: "btn btn-warning" %> 
+     <%= link_to "Export", "#", class: "btn btn-info" %> </td>
 
-  <h1>All Wikis</h1>
-  <% @wikis.each do |wiki| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-    <p><%= link_to wiki.subject, wiki %></p>
-       </h4>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-      
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-pencil"></span> 
+  Create New Wiki
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Create New Wiki</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for Wiki.new do |f| %>
+         <%= f.text_field :subject, class: 'form-control', placeholder: "Enter wiki subject" %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+          <%= f.submit "Save", class: 'btn btn-success' %>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        
       </div>
     </div>
-  <% end %>
+  </div>
+</div>
+
