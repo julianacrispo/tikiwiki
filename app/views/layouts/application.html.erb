@@ -1,71 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TikiWiki</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>TikiWiki</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  
+  <body>
+  
+  <!-- Trying a navbar -->
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">TikiWiki</a>
+      </div>
 
-
-
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-      <a class="navbar-brand" href="#">TikiWiki</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Wikis", wikis_path %></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <li><%= link_to "Home", welcome_index_path %></li>
+          </li>
           <% if current_user %>
-          <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-        </li>
-        <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <li> <%= link_to "Sign In", new_user_session_path %> </li>
-        <% end %>
-        
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
- <div class = "container"> 
-
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:notice] %>
-        </div>
-      <% elsif flash[:error] %>
-        <div class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:error] %>
-        </div>
-      <% elsif flash[:alert] %>
-        <div class="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:alert] %>
-        </div>
-      <% end %>
+            <li><%= link_to "My Wikis", wikis_path %></li>
+          <% end %>
+        </ul>
       
-      <%= yield %>
-</div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <% if current_user %>
+          </li>
+          <li>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+          </li>
+          <li>
+             <% else %>
+               <%= link_to "Sign In", new_user_session_path %> 
+          </li>
+          <li>
+               <%= link_to "Sign Up", new_user_registration_path %>
+          </li>
+             <% end %>
+          </li>
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+     
+     <% if flash[:notice] %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash[:notice] %>
+          </div>
+        <% elsif flash[:error] %>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash[:error] %>
+          </div>
+        <% elsif flash[:alert] %>
+          <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
 
-</body>
+      <%= yield %>
+
+  </div>  <!-- container end -->
+
+  </body>
 </html>
+

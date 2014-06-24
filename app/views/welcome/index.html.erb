@@ -1,11 +1,22 @@
-<br/>
-<div class="jumbotron">
-  <h1>TikiWiki</h1>
-  <p>Create and Share Markdown Wikis</p>
-  <p>
-      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %> or 
-      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %> today!
-  </p>
+<div class = "jumbotron">
+  <div class = "row">
+    <div class= "col-md-4"> 
+      <img src="http://www.winecoastcountry.com/images/assets/eat/Creeky_Tiki.jpg" width="300" height="300">
+    </div>
+    <div class ="col-xs-12 col-md-8">
+      <div class = "home-btns">
+        <h2> TikiWiki</h2>
+        <% if current_user %>
+          <h3> Welcome <%= current_user.email %>! </h3> 
+          <%= link_to "My Wikis", wikis_path, class: 'btn btn-success
+          btn-lg'%>
+        <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: 'btn btn-success btn-lg' %> or 
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-info btn-lg" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -17,4 +28,3 @@
     <h2>Premium Plan</h2>
     <p>Create private wikis</p>
   </div>
-</div>
