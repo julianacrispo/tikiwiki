@@ -31,6 +31,7 @@ gem 'figaro'
 gem 'whenever'
 gem 'faker'
 gem 'redcarpet', '~> 2.3.0'
+gem 'friendly_id', '~> 5.0.0'
 gem 'country_select'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
