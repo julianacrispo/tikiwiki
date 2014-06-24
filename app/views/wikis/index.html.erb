@@ -15,8 +15,8 @@
       <% @wikis.each do |wiki| %>
     <tr> 
       <td><%= link_to wiki.subject, wiki %> </td>
-      <td><%= link_to "Edit", wiki, class: "btn btn-success" %> 
-          <%= link_to "Delete", "#", class: "btn btn-warning" %> 
+      <td><%= link_to "View & Edit", wiki, class: "btn btn-success" %> 
+          <%= link_to "Delete", wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
      <%= link_to "Export", "#", class: "btn btn-info" %> </td>
 
     </tr>

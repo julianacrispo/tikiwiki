@@ -38,5 +38,14 @@ class WikisController < ApplicationController
     end
   end
 
+  def destroy
+    @wiki = Wiki.find(params[:id])
+      if @wiki.destroy
+        flash[:notice] = "List was deleted successfully"
+        redirect_to @wiki
+      
+      end
+  end
+
 
 end
