@@ -43,7 +43,9 @@ class WikisController < ApplicationController
       if @wiki.destroy
         flash[:notice] = "List was deleted successfully"
         redirect_to @wiki
-      
+      else 
+        flash[:error] = "There was an error deleting your wiki. Please try again."
+        render :edit
       end
   end
 
