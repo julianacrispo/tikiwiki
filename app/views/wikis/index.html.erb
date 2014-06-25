@@ -8,6 +8,7 @@
   <thead>
     <tr> 
       <th> Wiki </th>
+      <th> Wiki Owner </th>
       <th> Actions</th>
 
     </tr> 
@@ -16,6 +17,7 @@
       <% @wikis.each do |wiki| %>
     <tr> 
       <td><%= link_to wiki.subject, wiki %> </td>
+      <td> <%= wiki.user.email %> </td>
       <td><%= link_to "View & Edit", wiki, class: "btn btn-success" %> 
           <%= link_to "Delete", wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
      <%= link_to "Export", "#", class: "btn btn-info" %> </td>
