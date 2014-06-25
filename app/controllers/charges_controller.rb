@@ -20,7 +20,7 @@ class ChargesController < ApplicationController
    )
  
    flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-   redirect_to user_path(current_user) # or wherever
+   redirect_to new_wiki_path(current_user) # or wherever
  
  # Stripe will send back CardErrors, with friendly messages
  # when something goes wrong.
@@ -34,7 +34,7 @@ class ChargesController < ApplicationController
    @stripe_btn_data = {
      key: "#{ Rails.configuration.stripe[:publishable_key] }",
      description: "TikiWiki Membership - #{current_user.name}",
-     amount: 1 
+     amount: 50 
    }
  end
 
