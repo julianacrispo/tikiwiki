@@ -1,5 +1,6 @@
 class WikisController < ApplicationController
   def index
+    # @wikis = Wiki.visible_to(current_user)
     @wikis = current_user.wikis.friendly.all
     @wiki = Wiki.new
   end
@@ -16,7 +17,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.build(params.require(:wiki).permit(:subject, :body))
+    @wiki = current_user.wikis.build(params.require(:wiki).permit(:subject, :body, :private))
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki

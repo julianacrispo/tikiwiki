@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <%= current_user.email %>'s wikis
+ <!--  <%= current_user %>'s wikis -->
   </div>
 </div>
 
@@ -9,6 +9,7 @@
     <tr> 
       <th> Wiki </th>
       <th> Actions</th>
+
     </tr> 
   </thead>
      <tbody>
@@ -36,12 +37,19 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Create New Wiki</h4>
+        <%= form_for Wiki.new do |f| %>   <div class="form-group">
+        <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private %> Private topic
+        <% end %>
+      </div>
       </div>
       <div class="modal-body">
-        <%= form_for Wiki.new do |f| %>
+        
          <%= f.text_field :subject, class: 'form-control', placeholder: "Enter wiki subject" %>
          <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+
           <%= f.submit "Save", class: 'btn btn-success' %>
+
         <% end %>
 
       </div>
