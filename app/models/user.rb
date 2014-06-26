@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :wikis
+  has_many :posts
+  # has_many :collaborations
+  # has_many :posts, :through => :collaborations
 end

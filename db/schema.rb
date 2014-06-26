@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625154827) do
+ActiveRecord::Schema.define(version: 20140626161630) do
+
+  create_table "collaborations", force: true do |t|
+    t.integer  "wiki_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "post_id"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -31,8 +39,10 @@ ActiveRecord::Schema.define(version: 20140625154827) do
     t.integer  "wiki_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
   add_index "posts", ["wiki_id"], name: "index_posts_on_wiki_id"
 
   create_table "users", force: true do |t|
