@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get 'collaborators/index'
 
   devise_for :users
   resources :users, only: [:show, :index, :update]
   
-  resources :wikis
+  resources :wikis do
+    resources :collaborators, only: [:show, :create, :destroy]
+  end
+
   resources :charges, only: [:new, :create]
 
   get 'welcome/index'

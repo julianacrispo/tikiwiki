@@ -2,7 +2,39 @@
 
 <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
 
+
+
 <%= markdown @wiki.body %> 
+
+
+<% @collaborations.each do |collaboration| %>
+<
+<% end %>
+
+<table class="table table-hover">
+    <thead>
+    <tr> 
+      <th> Name </th>
+      <th> Email</th>
+      <th> Give access </th>
+
+    </tr> 
+  </thead>
+     <tbody>
+       <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %> </td>
+        <td><%= user.email %> </td>
+        <td>  
+        <%= button_tag type: 'submit', class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-star"></span> Collaborate
+        <% end %></td>
+      </tr>
+      <% end %>
+    </tbody>
+ </table>
+
+
  
 
 
