@@ -41,15 +41,7 @@
         <h4 class="modal-title" id="myModalLabel">Create New Wiki</h4> 
       </div>
       <div class="modal-body">
-        <%= form_for Wiki.new do |f| %>  
-         <%= f.text_field :subject, class: 'form-control', placeholder: "Enter wiki subject" %>
-         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
-          <div class="form-group">
-            <%= f.label :private, class: 'checkbox' do %>
-            <%= f.check_box :private %> Private Wiki
-           <% end %>
-          <%= f.submit "Save", class: 'btn btn-success' %>
-        <% end %>
+    <%= render partial: 'form', locals: { wiki: @wiki } %>
       </div>
     </div>
       <div class="modal-footer">

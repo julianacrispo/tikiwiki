@@ -33,7 +33,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.friendly.find(params[:id])
-    if @wiki.update_attributes(params.require(:wiki).permit(:subject, :body))
+    if @wiki.update_attributes(params.require(:wiki).permit(:subject, :body, :private))
       flash[:notice] = "Wiki was updated"
       redirect_to @wiki
     else 
@@ -51,7 +51,7 @@ class WikisController < ApplicationController
         flash[:error] = "There was an error deleting your wiki. Please try again."
         render :edit
       end
-  end
-
+    end
 
 end
+
