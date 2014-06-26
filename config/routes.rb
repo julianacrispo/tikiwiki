@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'collaborators/index'
+
   devise_for :users
   resources :users, only: [:show, :index, :update]
   
