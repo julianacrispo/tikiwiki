@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'welcome/wikis'
   root 'welcome#index'
+
+  # mount EpicEditor::Engine => "edit_wiki_path(@wiki)"
 end
 
   # The priority is based upon order of creation: first created -> highest priority.
