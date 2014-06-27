@@ -4,5 +4,19 @@
 
 <%= markdown @wiki.body %> 
 
+<% @posts.each do |post| %>
+<%= post.body %>
+<% end %>
+
+ <%= form_for [@wiki, @post] do |f| %>
+     <%= f.text_field :body, placeholder: "add text" %>
+     <%= f.submit "add", class: 'btn btn-success' %>
+  <% end %>
+
 <%= render partial: 'collaborators/collaborator', locals: { wiki: @wiki, user: @user } %>
 
+
+
+   
+
+     

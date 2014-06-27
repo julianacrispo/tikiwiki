@@ -8,6 +8,8 @@ class WikisController < ApplicationController
   def show
     @wiki = Wiki.friendly.find(params[:id])
     @users = User.all
+    @posts = @wiki.posts
+    @post = Post.new
     @collaborations = @wiki.collaborations
     if request.path != wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently

@@ -30,4 +30,7 @@ class CollaboratorsController < ApplicationController
       redirect_to @wiki
     end
   end
+
+
+
 end
