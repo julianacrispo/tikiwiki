@@ -1,4 +1,4 @@
-class CollaboratorsController < ApplicationController
+class CollaborationsController < ApplicationController
   def show
     @users = User.all
   end

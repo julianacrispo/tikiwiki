@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   resources :wikis do
     resources :posts, only: [:create]
-    resources :collaborators, only: [:show, :create, :destroy]
+    resources :collaborations, only: [:show, :create, :destroy]
   end
 
   resources :charges, only: [:new, :create]
