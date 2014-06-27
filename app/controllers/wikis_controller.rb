@@ -49,10 +49,10 @@ class WikisController < ApplicationController
   def destroy
     @wiki = Wiki.friendly.find(params[:id])
       if @wiki.destroy
-        flash[:notice] = "List was deleted successfully"
+        flash[:notice] = "Wiki was deleted successfully"
         redirect_to @wiki
       else 
-        flash[:error] = "There was an error deleting your wiki. Please try again."
+        flash[:error] = "There was an error deleting your Wiki. Please try again."
         render :edit
       end
     end

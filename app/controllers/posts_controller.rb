@@ -16,7 +16,8 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :body
-      )
+      :body,
+      :wiki_id,
+      :user_id)
   end
 end

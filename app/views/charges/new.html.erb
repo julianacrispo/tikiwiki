@@ -1,8 +1,56 @@
  <%= form_tag charges_path do %>
    <!-- The form doesn't pass the amount to the create action, so we have to pass it manually. -->
    <%= hidden_field_tag :amount, @stripe_btn_data[:amount] %>
- 
-   <h4>Click the button!</h4>
    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= +@stripe_btn_data[:amount] %> data-description=="<%= @stripe_btn_data[:description] %>" ></script>
  <% end %>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+      <h1> Awesome call to action </h1>
+      </div>
+    </div>
+  </div>
+<div class="row">
+  <div class="col-md-6">
+  <div class="panel panel-info">
+     <div class="panel-heading"><h3 class="text-center">REGULAR PLAN</h3></div>
+         <div class="panel-body text-center">
+      <p class="lead" style="font-size:40px"><strong> Free </strong></p>
+    </div>
+                       <ul class="list-group list-group-flush text-center">
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited Public Wikis</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> View other Public Wikis</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> Custom Wiki URLs</li>
+            </ul>
+    <div class="panel-footer">
+   
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-block btn-info" %>
+  </div>
+ </div>
+
+  </div>
+   <div class="col-md-6">
+  <div class="panel panel-success">
+     <div class="panel-heading"><h3 class="text-center">PREMIUM PLAN</h3></div>
+         <div class="panel-body text-center">
+      <p class="lead" style="font-size:40px"><strong>$4.99 / month</strong></p>
+    </div>
+                       <ul class="list-group list-group-flush text-center">
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> <strong> UNLIMITED </strong> Private & Public Wikis</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> Share & Collaboration Capabilities</li>
+              <li class="list-group-item"><i class="icon-ok text-danger"></i> Custom URLS and Much More!</li>
+            </ul>
+    <div class="panel-footer">
+     <%= form_tag charges_path do %>
+   <!-- The form doesn't pass the amount to the create action, so we have to pass it manually. -->
+   <%= hidden_field_tag :amount, @stripe_btn_data[:amount] %>
+   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= +@stripe_btn_data[:amount] %> data-description=="<%= @stripe_btn_data[:description] %>" ></script>
+ <% end %>
+
+  </div>
+ </div>
+  </div>
+  </div>
+</div>
