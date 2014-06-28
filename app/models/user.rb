@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :wikis
   has_many :posts
-  has_many :collaborations, dependent: :destroy
-  # has_many :wikis, :through => :collaborations
+  has_and_belongs_to_many :wikis
 end
