@@ -10,7 +10,6 @@ class WikisController < ApplicationController
     @users = User.all
     @posts = @wiki.posts
     @post = Post.new
-    @collaborations = @wiki.collaborations
     if request.path != wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
     end
