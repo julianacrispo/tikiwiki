@@ -1,14 +1,37 @@
-<h1>Edit Wiki</h1>
+<h1> Edit Wiki </h1>
+
 <div class="row">
-  <div class="col-md-4">
-    <p>Guidelines for Wikis</p>
-    <ul>
-      <li>#</li>
-      <li>#</li>
-      <li>#</li>
-    </ul>
+  <div class="col-xs-4">
+      <%= @wiki.body %>
   </div>
-  <div class="col-md-8">
-    <%= render partial: 'form', locals: { wiki: @wiki } %>
+   <div class="col-xs-4">
+    <%= form_for [@wiki] do |f| %>
+     <div class="form-group">
+        <%= f.label :subject %>
+        <%= f.text_field :subject, class: 'form-control', placeholder: "Enter post title" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, class: 'form-control', placeholder: "Enter post title" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Save", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+
   </div>
-</div>
+</div> 
+ <table class="table table-hover">
+    <thead>
+    <tr> 
+      <th> Collaborators </th>
+    </tr> 
+  </thead>
+     <tbody>
+       <% User.all.each do |user| %>
+      <tr>
+        <td> <%= check_box_tag "wiki[user_ids][]", user.id, @wiki.users.include?(user)%> <%= user.email %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+ </table>

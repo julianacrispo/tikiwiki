@@ -7,9 +7,9 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:id])
+    @users = @wiki.users
     @users = User.all
-    @posts = @wiki.posts
-    @post = Post.new
+
     if request.path != wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
     end
@@ -28,6 +28,7 @@ class WikisController < ApplicationController
       flash[:error] = "there was an error saving the wiki. Please try again"
       render :new
     end
+
   end
 
   def edit
@@ -35,6 +36,7 @@ class WikisController < ApplicationController
   end
 
   def update
+
     @wiki = Wiki.friendly.find(params[:id])
     if @wiki.update_attributes(params.require(:wiki).permit(:subject, :body, :private))
       flash[:notice] = "Wiki was updated"
