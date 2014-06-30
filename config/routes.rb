@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :update]
   
   resources :wikis do
+    member do
+      post :add_collaborator
+    end
+
     resources :posts, only: [:create]
-    resources :collaborations, only: [:show, :create, :destroy]
   end
 
   resources :charges, only: [:new, :create]
