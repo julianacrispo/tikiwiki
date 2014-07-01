@@ -8,10 +8,8 @@ class User < ActiveRecord::Base
   #has_many :managed_wikis, class: "Wiki"
   has_and_belongs_to_many :wikis
 
-  #TODO - fetch from redis the allowed wikis and return them
-  # def allowed_wikis
-  #   #user_ids = $redis.smembers("wiki-collaborators-#{@wiki.id}")
-  #   # $redis.sadd("user-wikis-#{params[:user_id]}", @wiki.id) 
-
-  # end
+  def allowed_wikis
+   wiki_ids = $redis.smembers("user-wikis-#{self.id}")
+   Wiki.where(:id => wiki_ids)
+   end
 end

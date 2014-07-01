@@ -17,8 +17,23 @@ class Wiki < ActiveRecord::Base
 #added
    accepts_nested_attributes_for :users
 
-  # def collaborator_list_key
-  #   $redis.sadd("wiki-collaborators-#{@wiki.id}", params[:user_id]) 
-  #   $redis.sadd("user-wikis-#{params[:user_id]}", @wiki.id) 
-  # end
+  def allowed_users
+    user_ids = $redis.smembers("wiki-collaborators-#{self.id}")
+    User.where(:id => user_ids)
+  end
 end
+
+
+#   def collaborator_list_key
+# "wiki-collaborators-#{@wiki.id}", params[:user_id]) 
+#   #   $redis.sadd("user-wikis-#{params[:user_id]}", @wiki.id) 
+#   # end
+
+  # def collaborators_list_key
+  #    $redis.smembers("wiki-collaborators-#{@wiki.id}", params[:user_id]) 
+  #    $redis.smembers("user-wikis-#{params[:user_id]}", @wiki.id) 
+  # end
+
+ 
+  
+

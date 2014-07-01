@@ -1,18 +1,12 @@
 class WikisController < ApplicationController
   def index
-    
-    #TODO
-    # wiki should contain your own wikis + collaborator wikis
-    @wikis = Wiki.all
-    # @wikis = current_user.allowed_wikis
-
+    @wikis = current_user.allowed_wikis
     @wiki = Wiki.new
   end
 
   def show
     @wiki = Wiki.friendly.find(params[:id])
-    @users = @wiki.users
-    @users = User.all
+    @users = @wiki.allowed_users
 
     if request.path != wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
@@ -43,7 +37,6 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.friendly.find(params[:id])
-    # user_ids = 
     if @wiki.update_attributes(params.require(:wiki).permit(:subject, :body, :private))
       flash[:notice] = "Wiki was updated"
       redirect_to @wiki
@@ -63,16 +56,10 @@ class WikisController < ApplicationController
         render :edit
       end
     end
-  
+
   def add_collaborator
-
     @wiki = Wiki.find(params[:id])
-
     if params[:user_id].present?
-
-      #TODO
-      # $redis.sadd(@wiki.collaborator_list_key)
-
       $redis.sadd("wiki-collaborators-#{@wiki.id}", params[:user_id]) 
       $redis.sadd("user-wikis-#{params[:user_id]}", @wiki.id) 
 
@@ -82,6 +69,6 @@ class WikisController < ApplicationController
       flash[:error] = "Collaborator couldn't be added"
         render :edit
     end
-  end
+  end 
 end
 

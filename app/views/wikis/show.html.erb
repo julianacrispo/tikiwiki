@@ -4,28 +4,47 @@
 
 <%= render partial: 'form', locals: { wiki: @wiki, user: @user} %>
 
-
-<%= render partial: 'join', locals: { user: @user } %>
-  </div>
-
-<div class="control-group span13 columns4 checkbox-group">
-      <div class="controls">
-  <%= hidden_field_tag "wiki[user_ids][]", nil%>
-            <% User.all.each do |user| %>
-                  <label class="checkbox">
-                      <%= check_box_tag "wiki[user_ids][]", user.id, @wiki.user_ids.include?(user.id), id: dom_id(user) %>
-                      <%= user.email %>
-                  </label>
-            <% end %>
-      </div>
-</div>
-
-
-
-<%= form_tag("/wikis/#{@wiki.id}/add_collaborator", method: "post") do %>
+ <%= form_tag("/wikis/#{@wiki.id}/add_collaborator", method: "post") do %>
   <%= label_tag(:user_id, "User id:") %>
   <%= text_field_tag(:user_id) %>
   <%= submit_tag("Add collaborator") %>
 <% end %>
+
+ <table class="table table-hover">
+    <thead>
+    <tr> 
+      <th> Collaborators </th>
+    </tr> 
+  </thead>
+     <tbody>
+       <% User.all.each do |user| %>
+      <tr>
+        <td> <%= check_box_tag "wiki[user_ids][]", user.id, @wiki.users.include?(user)%> <%= user.email %>  </td>
+      </tr>
+      <% end %>
+    </tbody>
+ </table>
+
+
+
+  <table class="table table-hover">
+    <thead>
+    <tr> 
+      <th> Collaborators </th>
+    </tr> 
+  </thead>
+     <tbody>
+       <% User.all.each do |user| %>
+      <tr>
+        <!-- if an allowed user of the wiki, display them here -->
+        <td> <%= @wiki.allowed_users %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+ </table>
+
+
+ <%= render partial: 'join', locals: { user: @user } %>
+  </div>
 
      

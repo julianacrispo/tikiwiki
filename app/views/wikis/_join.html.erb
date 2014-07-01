@@ -1,19 +1,4 @@
-
-
- <table class="table table-hover">
-    <thead>
-    <tr> 
-      <th> Collaborators </th>
-    </tr> 
-  </thead>
-     <tbody>
-       <% User.all.each do |user| %>
-      <tr>
-        <td> <%= check_box_tag "wiki[user_ids][]", user.id, @wiki.users.include?(user)%> <%= user.email %> </td>
-      </tr>
-      <% end %>
-    </tbody>
- </table>
+ <h4> join partial placeholder </h4>
 
 
 
