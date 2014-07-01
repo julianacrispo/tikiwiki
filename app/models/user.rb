@@ -6,10 +6,23 @@ class User < ActiveRecord::Base
 
   has_many :posts
   #has_many :managed_wikis, class: "Wiki"
-  has_and_belongs_to_many :wikis
+  has_many :wikis
+
+  after_destroy :destroy_collaborated_wikis_before_delete
+
 
   def allowed_wikis
-   wiki_ids = $redis.smembers("user-wikis-#{self.id}")
-   Wiki.where(:id => wiki_ids)
-   end
+    wiki_ids = $redis.smembers(self.collaborated_wikis_hash_key)
+    Wiki.where(:id => wiki_ids)
+  end
+
+#the key for the users that are collaborators on the wiki
+  def self.collaborated_wikis_hash_key(user_id)
+    "user-wikis-#{user_id}"
+  end
+
+# the key for the wikis the user is a collaborator on
+  def collaborated_wikis_hash_key
+    User.collaborated_wikis_hash_key(self.id)
+  end
 end

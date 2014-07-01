@@ -1,7 +1,10 @@
 class WikisController < ApplicationController
   def index
-    @wikis = current_user.allowed_wikis
+    @wikis = current_user.allowed_wikis.to_a
+    @wikis += current_user.wikis
     @wiki = Wiki.new
+
+    @collaborators = $redis.smembers("wiki-collaborators-#{@wiki.id}")
   end
 
   def show
@@ -60,8 +63,8 @@ class WikisController < ApplicationController
   def add_collaborator
     @wiki = Wiki.find(params[:id])
     if params[:user_id].present?
-      $redis.sadd("wiki-collaborators-#{@wiki.id}", params[:user_id]) 
-      $redis.sadd("user-wikis-#{params[:user_id]}", @wiki.id) 
+      $redis.sadd(@wiki.wiki_collaborators_hash_key, params[:user_id]) 
+      $redis.sadd(User.collaborated_wikis_hash_key(params[:user_id]), @wiki.id) 
 
       flash[:notice] = "#{params[:user_id]} was added to the collaborators list"
       render :show
@@ -70,5 +73,9 @@ class WikisController < ApplicationController
         render :edit
     end
   end 
+
+#TODO, and implement view to remove collaborators from the wiki
+  def remove_collaborator
+  end
 end
 

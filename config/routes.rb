@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :wikis do
     member do
       post :add_collaborator
+      post :remove_collaborator
     end
 
     resources :posts, only: [:create]

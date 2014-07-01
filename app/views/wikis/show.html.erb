@@ -19,7 +19,7 @@
      <tbody>
        <% User.all.each do |user| %>
       <tr>
-        <td> <%= check_box_tag "wiki[user_ids][]", user.id, @wiki.users.include?(user)%> <%= user.email %>  </td>
+        <td> # </td>
       </tr>
       <% end %>
     </tbody>
