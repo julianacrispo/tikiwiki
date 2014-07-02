@@ -22,9 +22,9 @@ class Wiki < ActiveRecord::Base
 
 #cleans up redis collaborators when wiki is deleted so collaborators no longer have access to that wiki
   def destroy_collaborators_before_delete
-    #1 fetch list of user_ids for wiki from redis
+    #1 fetch list of user_ids tht are collaborators on that wiki from redis
     user_ids = $redis.smembers(self.wiki_collaborators_hash_key)
-    #2 iterate over user ids
+    #2 iterate over those user id's and remove instances where user is collaborator on that wiki 
     user_ids.each do |user_id|
       $redis.srem(User.collaborated_wikis_hash_key(user_id), self.id)
     end
