@@ -8,7 +8,10 @@ class User < ActiveRecord::Base
   #has_many :managed_wikis, class: "Wiki"
   has_many :wikis
 
+  
+
   after_destroy :destroy_collaborated_wikis_before_delete
+
 
 
   def allowed_wikis
@@ -25,4 +28,20 @@ class User < ActiveRecord::Base
   def collaborated_wikis_hash_key
     User.collaborated_wikis_hash_key(self.id)
   end
+
+#TODO
+
+#cleans up redis wikis when user is deleted 
+#so collaboratored wikis no longer have access by the user
+  def destroy_collaborated_wikis_before_delete
+    #1 fetch list of wiki_ids for that the user is a collaborator on
+      wiki_ids = $redis.smembers(self.collaborated_wikis_hash_key)
+       #2 iterate over those wiki ids and remove instances where that user/wiki relationship exists
+       #not sure about the below
+    wiki_ids.each do |wiki_id|
+      $redis.srem(Wiki.wiki_collaborators_hash_key(wiki_id), self.id)
+    end
+    $redis.del(self.collaborated_wikis_hash_key)
+  end
+
 end

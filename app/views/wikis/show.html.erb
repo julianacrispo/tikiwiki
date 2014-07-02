@@ -10,16 +10,23 @@
   <%= submit_tag("Add collaborator") %>
 <% end %>
 
+ <%= form_tag("/wikis/#{@wiki.id}/remove_collaborator", method: "post") do %>
+  <%= label_tag(:user_id, "User id:") %>
+  <%= text_field_tag(:user_id) %>
+  <%= submit_tag("Remove collaborator") %>
+<% end %>
+
+
  <table class="table table-hover">
     <thead>
     <tr> 
-      <th> Collaborators </th>
+      <th> ETC... </th>
     </tr> 
   </thead>
      <tbody>
        <% User.all.each do |user| %>
       <tr>
-        <td> # </td>
+        <td> Display allowed users here </td>
       </tr>
       <% end %>
     </tbody>

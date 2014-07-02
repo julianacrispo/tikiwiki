@@ -76,6 +76,17 @@ class WikisController < ApplicationController
 
 #TODO, and implement view to remove collaborators from the wiki
   def remove_collaborator
+    @wiki = Wiki.find(params[:id])
+    if params[:user_id].present?
+      $redis.srem(@wiki.wiki_collaborators_hash_key, params[:user_id]) 
+      $redis.srem(User.collaborated_wikis_hash_key(params[:user_id]), @wiki.id)
+
+      flash[:notice] = "#{params[:user_id]} was deleted from the collaborators list"
+      render :show
+    else
+      flash[:error] = "Collaborator couldn't be deleted"
+        render :edit
+    end
   end
 end
 
