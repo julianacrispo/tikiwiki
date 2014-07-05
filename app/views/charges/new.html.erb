@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="page-header">
-      <h1> Awesome call to action </h1>
+      <h1> Some call to action </h1>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
               <li class="list-group-item"><i class="icon-ok text-danger"></i> Custom URLS and Much More!</li>
             </ul>
     <div class="panel-footer">
-     <%= form_tag charges_path do %>
+  <%= form_tag charges_path do %>
    <!-- The form doesn't pass the amount to the create action, so we have to pass it manually. -->
    <%= hidden_field_tag :amount, @stripe_btn_data[:amount] %>
    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= +@stripe_btn_data[:amount] %> data-description=="<%= @stripe_btn_data[:description] %>" ></script>
@@ -54,3 +54,4 @@
   </div>
   </div>
 </div>
+

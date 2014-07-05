@@ -22,8 +22,7 @@
         <% if wiki.user_id == current_user.id %>
           <%= link_to "Delete", wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
           <% end %>
-     <%= link_to "Export", "#", class: "btn btn-info" %> </td>
-
+    
     </tr>
     <% end %>
   </tbody>
