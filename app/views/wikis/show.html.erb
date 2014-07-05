@@ -4,6 +4,7 @@
 <%= render partial: 'form', locals: { wiki: @wiki, user: @user} %>
 
 
+<% if current_user.premium %>
  <%= form_tag("/wikis/#{@wiki.id}/add_collaborator", method: "post") do %>
   <%= label_tag(:user_id, "User id:") %>
   <%= text_field_tag(:user_id) %>
@@ -14,5 +15,6 @@
   <%= label_tag(:user_id, "User id:") %>
   <%= text_field_tag :user_id %>
   <%= submit_tag("Remove collaborator") %>
+<% end %>
 <% end %>
 

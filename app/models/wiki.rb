@@ -10,6 +10,7 @@ class Wiki < ActiveRecord::Base
   validates :body, length: { minimum: 10 }, presence: true
   #validates :user, presence: true
 
+  #rails will run before the wiki destroy method
   before_destroy :destroy_collaborators_before_delete
 
   extend FriendlyId

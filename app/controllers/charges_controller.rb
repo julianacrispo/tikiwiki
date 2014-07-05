@@ -18,7 +18,9 @@ class ChargesController < ApplicationController
      description: "TikiWiki Membership - #{current_user.email}",
      currency: 'usd'
    )
- 
+ # once payment is received update flag to true
+  current_user.update_attribute(:premium, true)
+
    flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
    redirect_to new_wiki_path(current_user) # or wherever
  

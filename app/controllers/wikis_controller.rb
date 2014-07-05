@@ -62,7 +62,7 @@ class WikisController < ApplicationController
 
   def add_collaborator
     @wiki = Wiki.find(params[:id])
-    if params[:user_id].present?
+    if params[:user_id].present? && current_user.premium 
       $redis.sadd(@wiki.wiki_collaborators_hash_key, params[:user_id]) 
       $redis.sadd(User.collaborated_wikis_hash_key(params[:user_id]), @wiki.id) 
 

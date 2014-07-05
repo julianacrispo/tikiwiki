@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   #has_many :managed_wikis, class: "Wiki"
   has_many :wikis
 
-  
-
   after_destroy :destroy_collaborated_wikis_before_delete
 
 
